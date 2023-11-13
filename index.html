@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bracket Delimiter</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Bracket Delimiter</h1>
+
+    <input type="text" placeholder="Enter a Prompt" id="formValue" />
+
+    <button type="button" onclick="delimitAndDisplay()">Delimit</button>
+
+    <p id="output"></p>
+
+    <script>
+      function delimitAndDisplay() {
+        const formValue = document.getElementById("formValue").value;
+        const delimitedValue = createBracketDelimiter(formValue);
+        document.getElementById("output").innerHTML = delimitedValue;
+      }
+
+      function createBracketDelimiter(formValue) {
+        const stack = [];
+        let result = "";
+        let inBracket = false;
+
+        for (const char of formValue) {
+          if (char === "[" || char === "{" || char === "(" || char === "<") {
+            stack.push(char);
+            inBracket = true;
+          } else if (
+            char === "]" ||
+            char === "}" ||
+            char === ")" ||
+            char === ">"
+          ) {
+            if (stack.length === 0) {
+              alert("The brackets are not balanced.");
+              return;
+            }
+            const openingBracket = stack.pop();
+            if (areBracketsMatching(openingBracket, char)) {
+              inBracket = false;
+            } else {
+              alert("The brackets are not balanced.");
+              return;
+            }
+          }
+          if (
+            inBracket &&
+            char !== "[" &&
+            char !== "{" &&
+            char !== "(" &&
+            char !== "<" &&
+            char !== "]" &&
+            char !== "}" &&
+            char !== ")" &&
+            char !== ">"
+          ) {
+            result += char;
+          }
+        }
+
+        if (stack.length > 0) {
+          alert("The brackets are not balanced.");
+          return;
+        }
+
+        return result;
+      }
+
+      function areBracketsMatching(openingBracket, closingBracket) {
+        return (
+          (openingBracket === "[" && closingBracket === "]") ||
+          (openingBracket === "{" && closingBracket === "}") ||
+          (openingBracket === "(" && closingBracket === ")") ||
+          (openingBracket === "<" && closingBracket === ">")
+        );
+      }
+    </script>
+  </body>
+</html>
