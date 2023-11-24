@@ -16,7 +16,7 @@ To explore Stack Delimiter, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/Sukanyasingh3/Stack-Delimiter.git
+   git clone https://github.com/TartejBrothers/Stack-Delimiter.git
    cd stack-delimiter
    ```
 
